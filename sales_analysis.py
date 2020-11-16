@@ -66,6 +66,7 @@ print(df.head())
 # DATA EXPLORATION
 
 fig1, ax1 = plt.subplots()
+fig2, ax2 = plt.subplots()
 
 # What is the best month for sales? How much was earned that month?
 
@@ -83,5 +84,19 @@ ax1.set_title("Sales per Month")
 ax1.set_xticks(months)
 ax1.set_ylabel("Sales in USD ($)")
 ax1.set_xlabel("Month number")
+
+# What city sold the most products?
+
+highest_selling_city = df.groupby(["City"]).sum()
+print(highest_selling_city)
+
+cities = [city for city, cty in df.groupby(["City"])]
+print(cities)
+
+ax2.set_title("Sales Per City")
+ax2.bar(cities, highest_selling_city["Sales"])
+ax2.set_ylabel("Sales in USD ($)")
+ax2.set_xlabel("Month number")
+ax2.set_xticks(cities)
 
 plt.show()
