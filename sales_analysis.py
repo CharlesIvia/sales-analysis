@@ -67,6 +67,7 @@ print(df.head())
 
 fig1, ax1 = plt.subplots()
 fig2, ax2 = plt.subplots()
+fig3, ax3 = plt.subplots()
 
 # What is the best month for sales? How much was earned that month?
 
@@ -99,4 +100,25 @@ ax2.set_ylabel("Sales in USD ($)")
 ax2.set_xlabel("Month number")
 ax2.set_xticks(cities)
 
+# Optimal advertisement time to maximize likelihood of customers buying product
+
+# Add hour and minute column
+
+df["Hour"] = pd.to_datetime(df["Order Date"]).dt.hour
+df["Minute"] = pd.to_datetime(df["Order Date"]).dt.minute
+df["Count"] = 1
+
+print(df.head(50))
+
+order_hour = [pair for pair, dt in df.groupby(["Hour"])]
+y_axis = df.groupby(["Hour"]).count()["Count"]
+print(order_hour)
+print(y_axis)
+
+ax3.plot(order_hour, y_axis)
+ax3.set_title("Unique Orders Per Each Hour")
+ax3.grid()
+
 plt.show()
+
+# From this analysis,I would recommend advertisements to be run slightly before 11am or 7pm
