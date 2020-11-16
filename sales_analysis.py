@@ -44,10 +44,10 @@ df["Month"] = df["Order Date"].str[0:2]
 df["Month"] = df["Month"].astype("int32")
 print(df.head())
 
-# Add month column (alternative method)
+# Add month column (alternative but slower method)
 
-df["Sales Month"] = pd.to_datetime(df["Order Date"]).dt.month
-print(df.head())
+# df["Sales Month"] = pd.to_datetime(df["Order Date"]).dt.month
+# print(df.head())
 
 # Add city column
 
@@ -62,3 +62,26 @@ def get_state(addres):
 
 df["City"] = df["Purchase Address"].apply(lambda x: f"{get_city(x)}  ({get_state(x)})")
 print(df.head())
+
+# DATA EXPLORATION
+
+fig1, ax1 = plt.subplots()
+
+# What is the best month for sales? How much was earned that month?
+
+df["Sales"] = df["Quantity Ordered"].astype("int") * df["Price Each"].astype("float")
+
+print(df.head())
+
+
+sales = df.groupby(["Month"]).sum()
+print(sales)
+months = range(1, 13)
+
+ax1.bar(months, sales["Sales"])
+ax1.set_title("Sales per Month")
+ax1.set_xticks(months)
+ax1.set_ylabel("Sales in USD ($)")
+ax1.set_xlabel("Month number")
+
+plt.show()
