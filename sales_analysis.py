@@ -90,6 +90,8 @@ ax1.set_title("Sales per Month")
 ax1.set_xticks(months)
 ax1.set_ylabel("Sales in USD ($)")
 ax1.set_xlabel("Month number")
+fig1.tight_layout()
+fig1.savefig("./images/best_month.png")
 
 # What city sold the most products?
 
@@ -106,6 +108,7 @@ ax2.set_xlabel("Month number")
 ax2.set_xticks(cities)
 ax2.set_xticklabels(cities, rotation=90)
 fig2.tight_layout()
+fig2.savefig("./images/highest_selling_city.png")
 
 
 # Optimal advertisement time to maximize likelihood of customers buying product
@@ -128,6 +131,8 @@ ax3.set_title("Unique Orders Per Each Hour")
 ax3.set_xlabel("Hours in a day")
 ax3.set_ylabel("Unique Orders")
 ax3.grid()
+fig3.savefig("./images/advertise.png")
+
 
 # From this analysis,I would recommend advertisements to be run slightly before 11am or 7pm
 
@@ -160,6 +165,7 @@ ax4.bar(product_pairs, quantity_ordered)
 ax4.set_title("Products Sold Together")
 ax4.set_xticks(product_pairs)
 ax4.set_xticklabels(product_pairs, rotation=90)
+fig4.tight_layout()
+fig4.savefig("./images/sold_together.png")
 
-plt.tight_layout()
 plt.show()
